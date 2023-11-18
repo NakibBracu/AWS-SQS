@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "GetTenMessages";
+}
+
+@model List<MessageInfo>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Message List</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Body</th>
+                    <th>Message Size</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr>
+                        <td>@message.Body</td>
+                        <td>@message.MessageSize</td>
+                        <td>
+                            <form method="post" action="/SQS/DeleteReadMessagesFromQueue">
+                                <input type="hidden" name="receiptHandle" value="@message.ReceiptHandle" />
+                                <button class="delete-button" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No messages to display.</p>
+    }
+</body>
+</html>

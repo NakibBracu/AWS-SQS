@@ -1,0 +1,42 @@
+﻿@model AddMessageModel
+@{
+    ViewData["Title"] = "AddDataToRow";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h2 class="card-title">Adding Message to Queue</h2>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form role="form" asp-antiforgery="true" asp-action="AddMessageToQueue"
+                      asp-controller="SQS" method="post">
+                    <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Message"></label>
+                            <input type="text" class="form-control" asp-for="Message" placeholder="Enter The message">
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div> 
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->

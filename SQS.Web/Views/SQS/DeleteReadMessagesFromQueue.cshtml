@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "DeleteReadMessagesFromQueue";
+}
+
+<h1 style="color:red">DeleteReadMessagesFromQueue</h1>
+
+@model List<string>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deleted Messages List</title>
+</head>
+<body>
+    <h1>Message List</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <ol>
+            @foreach (var message in Model)
+            {
+                <li>@message</li>
+            }
+        </ol>
+    }
+    else
+    {
+        <p>No messages to display.</p>
+    }
+</body>
+</html>
